@@ -1,0 +1,49 @@
+#!/bin/bash
+
+echo "Listado de php.ini y su ubicación"
+echo "---------------------------------"
+echo "Los cambios que se harán sobre los siguientes archivos:"
+
+echo  `ls -l /opt/alt/php*/etc/php.ini | awk '{print $9}' `
+echo `php --ini | grep 'Loaded Configuration File' | awk '{print $4}'`
+
+
+PHPINI_BASE=`php --ini | grep 'Loaded Configuration File' | awk '{print $4}'`
+
+echo $PHPINI_BASE
+
+echo -e "\nSon los siguientes:\n"
+echo "memory_limit = 256M"
+echo "file_uploads = On"
+echo "post_max_size = 72M"
+echo "upload_max_filesize = 64M"
+echo -e "\n"
+echo "magic_quotes_gpc = Off"
+echo "magic_quotes_runtime = Off"
+echo "magic_quotes_sybase = Off"
+
+
+read -p "Presione [Enter] para realizar la modificación o [Crtl+c] para cancelar..."
+
+	sed -i 's/^file_uploads = [[:alpha:]]*/file_uploads = On/g' $PHPINI_BASE
+	sed -i 's/^memory_limit = [[:alnum:]]*/memory_limit = 256M/g' $PHPINI_BASE
+	sed -i 's/^post_max_size = [[:alnum:]]*/post_max_size = 72M/g' $PHPINI_BASE
+	sed -i 's/^upload_max_filesize = [[:alnum:]]*/upload_max_filesize = 64M/g' $PHPINI_BASE
+
+	sed -i 's/^magic_quotes_gpc = [[:alpha:]]*/magic_quotes_gpc = Off/g' $PHPINI_BASE
+	sed -i 's/^magic_quotes_runtime = [[:alpha:]]*/magic_quotes_runtime = Off/g' $PHPINI_BASE
+	sed -i 's/^magic_quotes_sybase = [[:alpha:]]*/magic_quotes_sybase = Off/g' $PHPINI_BASE
+
+for FILE in `ls -l /opt/alt/php*/etc/php.ini | awk '{print $9}'` 
+do
+
+	sed -i 's/^file_uploads = [[:alpha:]]*/file_uploads = On/g' $FILE
+	sed -i 's/^memory_limit = [[:alnum:]]*/memory_limit = 256M/g' $FILE
+	sed -i 's/^post_max_size = [[:alnum:]]*/post_max_size = 72M/g' $FILE
+	sed -i 's/^upload_max_filesize = [[:alnum:]]*/upload_max_filesize = 64M/g' $FILE
+
+	sed -i 's/^magic_quotes_gpc = [[:alpha:]]*/magic_quotes_gpc = Off/g' $FILE
+	sed -i 's/^magic_quotes_runtime = [[:alpha:]]*/magic_quotes_runtime = Off/g' $FILE
+	sed -i 's/^magic_quotes_sybase = [[:alpha:]]*/magic_quotes_sybase = Off/g' $FILE
+
+done
