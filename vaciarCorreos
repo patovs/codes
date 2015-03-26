@@ -1,0 +1,7 @@
+#!/bin/bash
+
+COLA_ACTUAL=`exim -bpc`
+exim -bpc | exiqgrep -i | xargs exim -Mrm
+COLA_VACIA=`exim -bpc`
+
+echo "Se vaciaron $COLA_ACTUAL correos"

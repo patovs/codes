@@ -1,0 +1,8 @@
+#!/bin/bash
+CANT_PROCESOS=`pgrep php | wc -l `
+
+if [ $CANT_PROCESOS -gt 100 ]
+then 
+        #echo "Existen $CANT_PROCESOS procesos de php!"
+        service httpd graceful
+fi
