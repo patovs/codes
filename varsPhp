@@ -50,3 +50,8 @@ do
 	sed -i 's/^magic_quotes_sybase = [[:alpha:]]*/magic_quotes_sybase = Off/g' $FILE
 
 done
+
+echo "Recargando la configuración de Apache..."
+service httpd reload
+echo "Terminado!"
+
