@@ -14,7 +14,7 @@ case $OPCION in
 		echo "Ingrese el username: "
 		read USER
 		FILE_LOG=$(date +%d-%m-%Y)_$USER
-		echo "El resultado será guardado en el archivo $FILE_LOG, en la ruta $RUTA_LOG_SCAN_FILE"
+		echo "El resultado será guardado en el archivo $RUTA_LOG_SCAN_FILE/$FILE_LOG"
 		echo "El escaneo iniciará en 5 segundos..."
 		sleep 5
 		egrep -n -r '(\\x[a-z]|\\x[0-9]|<?php if\(isset\(|eval\(base64_decode\(gzuncompress|gzuncompress|base64_decode|;eval\()|GIF89aG|b374k' /home/$USER/public_html --include=*.php | awk -F":" '{print $1":"$2":\t"$3}' | egrep '(:1:)' >> $RUTA_LOG_SCAN_FILE/$FILE_LOG
