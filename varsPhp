@@ -15,7 +15,8 @@ PHPINI_BASE=`php --ini | grep 'Loaded Configuration File' | awk '{print $4}'`
 
 echo "php.ini Usado actualmente --> $PHPINI_BASE"
 
-echo -e "\nSon los siguientes:\n"
+
+echo -e "\nLos parámetros a cargar son los siguientes:\n"
 echo "memory_limit = 256M"
 echo "file_uploads = On"
 echo "post_max_size = 72M"
@@ -24,6 +25,8 @@ echo -e "\n"
 echo "magic_quotes_gpc = Off"
 echo "magic_quotes_runtime = Off"
 echo "magic_quotes_sybase = Off"
+echo -e "\n"
+echo "max_input_vars = 6000"
 
 
 read -p "Presione [Enter] para realizar la modificación o [Crtl+c] para cancelar..."
@@ -37,6 +40,8 @@ read -p "Presione [Enter] para realizar la modificación o [Crtl+c] para cancela
 	sed -i 's/^magic_quotes_runtime = [[:alpha:]]*/magic_quotes_runtime = Off/g' $PHPINI_BASE
 	sed -i 's/^magic_quotes_sybase = [[:alpha:]]*/magic_quotes_sybase = Off/g' $PHPINI_BASE
 
+	sed -i 's/^max_input_vars = [[:alpha:]]*/max_input_vars = 2000/g' $PHPINI_BASE
+
 for FILE in `ls -l /opt/alt/php*/etc/php.ini | awk '{print $9}'` 
 do
 
@@ -48,6 +53,8 @@ do
 	sed -i 's/^magic_quotes_gpc = [[:alpha:]]*/magic_quotes_gpc = Off/g' $FILE
 	sed -i 's/^magic_quotes_runtime = [[:alpha:]]*/magic_quotes_runtime = Off/g' $FILE
 	sed -i 's/^magic_quotes_sybase = [[:alpha:]]*/magic_quotes_sybase = Off/g' $FILE
+	
+	sed -i 's/^max_input_vars = [[:alpha:]]*/max_input_vars = 2000/g' $PHPINI_BASE
 
 done
 
