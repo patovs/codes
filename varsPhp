@@ -59,6 +59,6 @@ do
 done
 
 echo "Recargando la configuración de Apache..."
-/etc/init.d/httpd reload
+/etc/init.d/httpd restart
 echo "Terminado!"
 
