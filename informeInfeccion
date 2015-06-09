@@ -2,7 +2,7 @@
 
 RUTA_LOG_SCAN_FILE=/root/apps/codes/log-scan
 
-echo "El script ejecutará un análisis al sistema detectando infecciones por CryptoPHP y otras truculencias"
+echo "El script ejecutará un análisis al sistema detectando infecciones PHP y otras truculencias"
 echo "harás el escaneo a un solo usuario o a todos?"
 echo "1-. Un único usuario"
 echo "2-. Todos"
@@ -19,8 +19,6 @@ case $OPCION in
 		sleep 5
 		egrep -n -r -I --exclude="sym" '(\\x[a-z]|\\x[0-9]|<?php if\(isset\(|eval\(base64_decode\(gzuncompress|gzuncompress|base64_decode|;eval\()|GIF89aG|b374k' /home/$USER/public_html --include=*.php | awk -F":" '{print $1":"$2":\t"$3}' | egrep '(:1:)' >> $RUTA_LOG_SCAN_FILE/$FILE_LOG
 		echo "Escaneo completo."
-		echo "Iniciando análisis CryptoPHP..."
-		./check_filesystem.py /home/$USER/public_html
 		exit 1
 		;;
 	2 ) 
@@ -33,8 +31,6 @@ case $OPCION in
         	then
                 echo -e "========================================================= $USER =============================================================\n" >> $RUTA_LOG_SCAN_FILE/$FILE_LOG
                 egrep -n -r -I --exclude="sym" '(\\x[a-z]|\\x[0-9]|<?php if\(isset\(|eval\(base64_decode\(gzuncompress|gzuncompress|base64_decode|;eval\()|GIF89aG|b374k' /home/$USER/public_html --include=*.php | awk -F":" '{print $1":"$2":\t"$3}' | egrep '(:1:)' >> $RUTA_LOG_SCAN_FILE/$FILE_LOG
-				echo "Iniciando análisis CryptoPHP..."
-				./check_filesystem.py /home/$USER/public_html
         	fi
 		done
 		echo "Escaneo terminado."
@@ -49,8 +45,6 @@ case $OPCION in
 		sleep 5
 		egrep -n -r -I --exclude="sym" '(\\x[a-z]|\\x[0-9]|<?php if\(isset\(|eval\(base64_decode\(gzuncompress|gzuncompress|base64_decode|;eval\()|GIF89aG|b374k' /home/$USER/public_html --include=*.php | awk -F":" '{print $1":"$2":\t"$3}' >> $RUTA_LOG_SCAN_FILE/$FILE_LOG
 		echo "Escaneo completo."
-		echo "Iniciando análisis CryptoPHP..."
-		./check_filesystem.py /home/$USER/public_html
 		exit 1
 		;;
 esac
