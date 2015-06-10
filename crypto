@@ -17,7 +17,7 @@ case $OPCION in
 		echo "El escaneo iniciará en 5 segundos..."
 		sleep 5
 		echo "Iniciando análisis CryptoPHP..."
-		./check_filesystem.py /home/$USER/public_html
+		./check_filesystem.py /home/$USER/public_html | grep '.png' >> $USER-$(date +%d%m%Y)-crypto.log
 		exit 1
 		;;
 	2 ) 
@@ -29,7 +29,7 @@ case $OPCION in
         	if [ "$USER" != "patovs" ]
         	then
 				echo "Iniciando análisis CryptoPHP..."
-				./check_filesystem.py /home/$USER/public_html
+				./check_filesystem.py /home/$USER/public_html | grep '.png' >> $USER-$(date +%d%m%Y)-crypto.log
         	fi
 		done
 		echo "Escaneo terminado."
@@ -42,7 +42,7 @@ case $OPCION in
 		echo "El escaneo iniciará en 5 segundos..."
 		sleep 5
 		echo "Iniciando análisis CryptoPHP..."
-		./check_filesystem.py /home/$USER/public_html
+		./check_filesystem.py /home/$USER/public_html | grep '.png' >> $USER-$(date +%d%m%Y)-crypto.log
 		exit 1
 		;;
 esac
