@@ -29,7 +29,7 @@ case $OPCION in
         	if [ "$USER" != "patovs" ]
         	then
 				echo "Iniciando análisis CryptoPHP..."
-				./check_filesystem.py /home/$USER/public_html | grep '.png' >> $USER-$(date +%d%m%Y)-crypto.log
+				./check_filesystem.py /home/$USER/public_html | grep '.png' >> $(date +%d%m%Y)-crypto.log
         	fi
 		done
 		echo "Escaneo terminado."
