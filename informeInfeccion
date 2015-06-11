@@ -1,5 +1,5 @@
 #!/bin/bash
-
+OPCION=$1
 RUTA_LOG_SCAN_FILE=/root/apps/codes/log-scan
 
 echo "El script ejecutará un análisis al sistema detectando infecciones PHP y otras truculencias"
@@ -7,7 +7,7 @@ echo "harás el escaneo a un solo usuario o a todos?"
 echo "1-. Un único usuario"
 echo "2-. Todos"
 echo "Opción (1,2): "
-read OPCION
+#read OPCION
 
 case $OPCION in
 	1 )
