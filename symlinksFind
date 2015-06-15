@@ -1,0 +1,50 @@
+#!/bin/bash
+OPCION=$1
+RUTA_LOG_SCAN_FILE=/root/apps/codes/log-scan
+
+echo "El script ejecutará un análisis al sistema detectando symlinks"
+echo "harás el escaneo a un solo usuario o a todos?"
+echo "1-. Un único usuario"
+echo "2-. Todos"
+echo "Opción (1,2): "
+#read OPCION
+
+case $OPCION in
+	1 )
+		echo "Ingrese el username: "
+		read USER
+		FILE_LOG=$(date +%d-%m-%Y)_$USER
+		echo "El escaneo iniciará en 5 segundos..."
+		sleep 5
+		echo "Iniciando análisis Symlinks..."
+		find -H /home/$USER/public_html -type l | egrep -v '(access-logs|rcube|sock)' >> $USER-$(date +%d%m%Y)-symlinks.log
+		exit 1
+		;;
+	2 ) 
+		FILE_LOG=$(date +%d-%m-%Y)_resultado
+		echo "El resultado del escaneo se guardará en $RUTA_LOG_SCAN_FILE/$FILE_LOG"
+		echo "El escaneo iniciará en 5 segundos..."
+		for USER in `cat /etc/trueuserdomains | awk '{print $2}'`
+		do
+        	if [ "$USER" != "patovs" ]
+        	then
+				echo "Iniciando análisis Symlinks..."
+				find -H /home/$USER/public_html -type l | egrep -v '(access-logs|rcube|sock)' >> $(date +%d%m%Y)-symlinks.log
+        	fi
+		done
+		echo "Escaneo terminado."
+		exit 1
+		;;
+	3 )
+		echo "Ingrese el username: "
+		read USER
+		FILE_LOG=$(date +%d-%m-%Y)_$USER
+		echo "El escaneo iniciará en 5 segundos..."
+		sleep 5
+		echo "Iniciando análisis Symlinks..."
+		find -H /home/$USER/public_html -type l | egrep -v '(access-logs|rcube|sock)' >> $USER-$(date +%d%m%Y)-symlinks.log
+		exit 1
+		;;
+esac
+
+
