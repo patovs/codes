@@ -21,7 +21,7 @@ case $OPCION in
 		exit 1
 		;;
 	2 ) 
-		FILE_LOG=$(date +%d-%m-%Y)_resultado
+		FILE_LOG=$(date +%d-%m-%Y)-symlinks.log
 		echo "El resultado del escaneo se guardará en $RUTA_LOG_SCAN_FILE/$FILE_LOG"
 		echo "El escaneo iniciará en 5 segundos..."
 		for USER in `cat /etc/trueuserdomains | awk '{print $2}'`
