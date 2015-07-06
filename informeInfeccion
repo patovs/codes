@@ -37,14 +37,18 @@ case $OPCION in
 		exit 1
 		;;
 	3 )
-		echo "Ingrese el username: "
-		read USER
-		FILE_LOG=$(date +%d-%m-%Y)_$USER
-		echo "El resultado será guardado en el archivo $FILE_LOG/$RUTA_LOG_SCAN_FILE"
+		FILE_LOG=$(date +%d-%m-%Y)_resultado
+		echo "El resultado del escaneo se guardará en $RUTA_LOG_SCAN_FILE/$FILE_LOG"
 		echo "El escaneo iniciará en 5 segundos..."
-		sleep 5
-		egrep -n -r -I --exclude="sym" '(\\x[a-z]|\\x[0-9]|<?php if\(isset\(|eval\(base64_decode\(gzuncompress|gzuncompress|base64_decode|;eval\()|GIF89aG|b374k' /home/$USER/public_html --include=*.php | awk -F":" '{print $1":"$2":\t"$3}' >> $RUTA_LOG_SCAN_FILE/$FILE_LOG
-		echo "Escaneo completo."
+		for USER in `cat /etc/trueuserdomains | awk '{print $2}'`
+		do
+        	if [ "$USER" != "patovs" ]
+        	then
+                echo -e "========================================================= $USER =============================================================\n" >> $RUTA_LOG_SCAN_FILE/$FILE_LOG
+                egrep -n -r -I --exclude="root" '(\\x[a-z]|\\x[0-9]|<?php if\(isset\(|eval\(base64_decode\(gzuncompress|gzuncompress|base64_decode|;eval\()|GIF89aG|b374k' /home/$USER/public_html --include=*.php | awk -F":" '{print $1":"$2":\t"$3}' >> $RUTA_LOG_SCAN_FILE/$FILE_LOG
+        	fi
+		done
+		echo "Escaneo terminado."
 		exit 1
 		;;
 esac
