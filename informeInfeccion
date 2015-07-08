@@ -52,6 +52,8 @@ case $OPCION in
 		exit 1
 		;;
 	4 )		
+		echo "Ingrese el username: "
+        read USER
 		FILE_LOG=$(date +%d-%m-%Y)_$USER_resultado
 		echo "El resultado del escaneo se guardará en $RUTA_LOG_SCAN_FILE/$FILE_LOG"
 		echo "El escaneo iniciará en 5 segundos..."
