@@ -15,8 +15,10 @@ do
 		echo "Procesando"
 		CARSd=$CARS"d"
 		sed -i "$CARSd" $TARGET
+		echo "comando ejecutado:"
+		echo "sed -i $CARSd $TARGET"
 	fi
 	
 
 done
-echo "nada que hacer"
+echo "Terminado"
