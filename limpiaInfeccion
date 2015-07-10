@@ -10,7 +10,9 @@ do
 	CARS=$(echo $line | awk -F: '{ print $1 }')
 	NUMBER_LINE=$(echo $line | awk -F: '{ print $2 }')
 	TARGET=$(echo $line | awk -F: '{ print $3 }')
-
-	sed -i '$(echo $CARS)d' $TARGET
+	if [ $CARS -gt 9000 ]
+	then
+		sed -i '$(echo $CARS)d' $TARGET
+	fi
 
 done
