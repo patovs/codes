@@ -12,8 +12,8 @@ do
 	TARGET=$(echo $line | awk -F: '{ print $3 }')
 	if [ $CARS -gt 9000 ]
 	then
-		CARSd=$CARS"d"
-		echo "sed -i \"$CARSd\" $TARGET"
+		NLd=$NUMBER_LINE"d"
+		echo "sed -i \"$NLd\" $TARGET"
 	fi
 	
 
