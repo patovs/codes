@@ -12,7 +12,8 @@ do
 	TARGET=$(echo $line | awk -F: '{ print $3 }')
 	if [ $CARS -gt 9000 ]
 	then
-		sed -i "$(echo $CARS)d" $TARGET
+		CARSd=$CARS"d"
+		sed -i "$CARSd" $TARGET
 	fi
 
 done
