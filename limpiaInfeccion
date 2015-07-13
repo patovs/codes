@@ -13,7 +13,7 @@ do
 	if [ $CARS -gt 9000 ]
 	then
 		NLd=$NUMBER_LINE"d"
-		sed -i "$NLd" $TARGET
+		echo "sed -i \"$NLd\" $TARGET"
 	fi
 	
 
