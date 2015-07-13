@@ -5,7 +5,7 @@ echo "(Debe ingresar la ruta completa del archivo)"
 
 read FILE
 
-for line in `cat $FILE | egrep -v '(^==|^0::)' | sed '/^$/d' | sort -rn`
+for line in `cat $FILE `
 do
 	CARS=$(echo $line | awk -F: '{ print $1 }')
 	NUMBER_LINE=$(echo $line | awk -F: '{ print $2 }')
